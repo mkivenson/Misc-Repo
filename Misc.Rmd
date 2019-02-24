@@ -16,7 +16,7 @@ library(plotly)
 
 ```{r data}
 misc <- read.csv("misc.csv")
-#1=circle, 2=triangle (replace as needed)
+#1=circle, 2=triangle (replace as needed) 
 misc$study <- as.character(c(1,1,1,1,1,1,1,1,2,1,1,1,2))
 funct  <- function(x) {100-1376/x}
 ```

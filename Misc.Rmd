@@ -18,17 +18,20 @@ library(plotly)
 misc <- read.csv("misc.csv")
 #1=circle, 2=triangle (replace as needed) 
 misc$study <- as.character(c(1,1,1,1,1,1,1,1,2,1,1,1,2))
-funct  <- function(x) {100-1376/x}
+funct  <- function(z) {100-1376/z}
+z <- 10:90
 ```
 
 ## Table
-```{r ggplot}
+```{r ggplot, warning=FALSE}
 ggplot(misc, aes(RATIO, deep_CONTRIBUTION)) + 
  geom_point(aes(color=Location, shape=study, size=1)) +
    stat_function(fun = funct) +
         ggtitle("Veronica's Chart") +
         xlab("Veronica's xlab") +
         ylab("Veronica's ylab") + 
+  xlim(10,100) +
+  ylim(10,90) +
   guides(size = FALSE)
 
 

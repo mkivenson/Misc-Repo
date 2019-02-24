@@ -1,0 +1,35 @@
+---
+title: "Report for Veronica"
+author: "Mary Anna Kivenson"
+date: "2/23/2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(plotly)
+
+```
+
+
+
+```{r data}
+misc <- read.csv("misc.csv")
+#1=circle, 2=triangle (replace as needed)
+misc$study <- as.character(c(1,1,1,1,1,1,1,1,2,1,1,1,2))
+funct  <- function(x) {100-1376/x}
+```
+
+## Table
+```{r ggplot}
+ggplot(misc, aes(RATIO, deep_CONTRIBUTION)) + 
+ geom_point(aes(color=Location, shape=study, size=1)) +
+   stat_function(fun = funct) +
+        ggtitle("Veronica's Chart") +
+        xlab("Veronica's xlab") +
+        ylab("Veronica's ylab") + 
+  guides(size = FALSE)
+
+
+```

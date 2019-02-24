@@ -2,7 +2,10 @@
 title: "Report for Veronica"
 author: "Mary Anna Kivenson"
 date: "2/23/2019"
-output: pdf_document
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
@@ -19,20 +22,19 @@ misc <- read.csv("misc.csv")
 #1=circle, 2=triangle (replace as needed) 
 misc$study <- as.character(c(1,1,1,1,1,1,1,1,2,1,1,1,2))
 funct  <- function(z) {100-1376/z}
-z <- 10:90
+z <- -5:90
 ```
 
 ## Table
 ```{r ggplot, warning=FALSE}
-ggplot(misc, aes(RATIO, deep_CONTRIBUTION)) + 
- geom_point(aes(color=Location, shape=study, size=1)) +
-   stat_function(fun = funct) +
-        ggtitle("Veronica's Chart") +
-        xlab("Veronica's xlab") +
-        ylab("Veronica's ylab") + 
-  xlim(10,100) +
-  ylim(10,90) +
+
+ggplot(misc, aes(misc$RATIO, misc$deep_CONTRIBUTION)) + 
+  scale_y_continuous(breaks=c(0, 10, 20, 30, 40, 50, 60, 70, 80, 90), limits = c(0,100)) +
+  scale_x_continuous(limits = c(0,100)) +
+ geom_point(aes(color=misc$Location, shape=misc$Location, size = 23, fill=misc$Location)) + 
+ stat_function(fun = funct) +
+ (scale_shape_manual(values=c(24, 24, 0, 21, 21, 21))) + 
+     theme(axis.title=element_text(size=14, face="bold")) + labs(x = "DDX / PCB", y = "%DDX from Deep Sea Disposal") +
+     theme(axis.title.y = element_text(margin = margin(t = 0, r = 15, b = 0, l = 0))) + theme(axis.title.x = element_text(margin = margin(t = 10, r = 0, b = 0, l = 0))) + theme(axis.text.x = element_text(face="bold", size=18, color = "black"), axis.text.y = element_text(face="bold", size=18, color = "black")) +
   guides(size = FALSE)
-
-
 ```
